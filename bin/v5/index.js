@@ -5,7 +5,7 @@ const startFunc = ({ filePath, fileContent, inAction = "Crud" }) => {
         case "Crud":
             const story = buildStory({ filePath, fileContent });
 
-            console.log("story : ", story);
+            // console.log("story : ", story);
 
             return story;
 
