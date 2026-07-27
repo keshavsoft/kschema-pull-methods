@@ -1,9 +1,12 @@
 import buildStory from './buildStory.js';
 
-const startFunc = ({ filePath, fileContent, inAction = "Crud" }) => {
+const startFunc = ({ filePath, fileContent, inAction = "Crud",
+    inTargetPath, showLog = false }) => {
+    if (showLog) console.log("filePath : ", filePath, inTargetPath, showLog);
+
     switch (inAction) {
         case "Crud":
-            const story = buildStory({ filePath, fileContent });
+            const story = buildStory({ filePath, fileContent, inTargetPath });
 
             // console.log("story : ", story);
 

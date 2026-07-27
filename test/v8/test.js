@@ -10,7 +10,8 @@ const fileContent = fs.readFileSync(appJsPath, 'utf8');
 import defaultFunc from '../../index.js';
 
 const k1 = defaultFunc({
-    filePath: appJsPath, fileContent
+    filePath: appJsPath, fileContent,
+    inTargetPath: __dirname
 });
 
 // console.log("ssssssssss : ", k1);
