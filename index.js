@@ -1,23 +1,15 @@
-import { existsSync, readdirSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { pathToFileURL, fileURLToPath } from "node:url";
+import { createRequire } from "module";
+import getLatestVersion from "./bin/core/getLatestVersion.js";
 
-const rootDir = dirname(fileURLToPath(import.meta.url));
-const binDir = join(rootDir, "bin");
+const require = createRequire(import.meta.url);
 
-const latestVersion = readdirSync(binDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && /^v\d+$/.test(entry.name))
-    .filter(({ name }) => existsSync(join(binDir, name, "index.js")))
-    .map(({ name }) => ({ name, version: Number(name.slice(1)) }))
-    .sort((a, b) => b.version - a.version)
-    .at(0);
+const v = getLatestVersion();
+const latestModule = require(`./bin/${v}/index.js`);
 
-if (!latestVersion) {
-    throw new Error("No versioned bin/v*/index.js entry found.");
-}
+const load = ({ inEndPointJsFilePath, inAction }) => {
 
-const latestModule = await import(
-    pathToFileURL(join(binDir, latestVersion.name, "index.js")).href
-);
+    return latestModule.default({ inEndPointJsFilePath, inAction });
 
-export default latestModule.default;
+};
+
+export default load;
