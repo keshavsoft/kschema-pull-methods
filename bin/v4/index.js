@@ -5,6 +5,8 @@ const startFunc = ({ inEndPointJsFilePath, inAction = "Crud" }) => {
         case "Crud":
             const story = buildStory({ inEndPointJsFilePath });
 
+            console.log("story : ", story);
+
             return story;
 
             break;

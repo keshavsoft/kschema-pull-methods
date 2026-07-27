@@ -1,10 +1,15 @@
-import path from "path";
-import load from "../../index.js";
-import fs from "fs";
+import path from 'path';
 
-const fromNpm = load({
-    toPath: path.join(process.cwd(), "api"),
-    inTargetPath: process.cwd()
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const appJsPath = path.join(__dirname, "api", "v1", "doctors", "end-points.js");
+
+import defaultFunc from '../../index.js';
+
+const k1 = defaultFunc({
+    inEndPointJsFilePath: appJsPath
 });
 
-console.log("aaaaaaaaaa : ", fromNpm);
+// console.log("ssssssssss : ", k1);
+console.log("ssssssssss : ", k1);

@@ -17,6 +17,8 @@ const startFunc = ({ inEndPointJsFilePath }) => {
         extractRegex: extractRegex.fromEndPointsJs
     });
 
+    // console.log("story : ", story.useLines);
+
     story?.useLines.forEach(element => {
         const fromNParts = nParts({
             matchLine: element.line, nParts: 3,
@@ -25,7 +27,7 @@ const startFunc = ({ inEndPointJsFilePath }) => {
 
         // console.log("fromNParts : ", fromNParts);
         storyOfEndPoint.push({
-            filePath: loopHiddenGems.filePath,
+            filePath: inEndPointJsFilePath,
             line: element.line,
             lineNumber: element.lineNumber,
             funcToRun: fromNParts?.part3,
@@ -35,6 +37,8 @@ const startFunc = ({ inEndPointJsFilePath }) => {
         // console.log("story : ", loopHiddenGems.trimmedElement, element.poka);
 
     });
+
+    // console.log("storyOfEndPoint : ", storyOfEndPoint);
 
     return storyOfEndPoint;
 };
