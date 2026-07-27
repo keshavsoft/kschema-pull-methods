@@ -6,9 +6,9 @@ const require = createRequire(import.meta.url);
 const v = getLatestVersion();
 const latestModule = require(`./bin/${v}/index.js`);
 
-const load = ({ inEndPointJsFilePath, inAction }) => {
+const load = ({ filePath, fileContent, inAction }) => {
 
-    return latestModule.default({ inEndPointJsFilePath, inAction });
+    return latestModule.default({ filePath, fileContent, inAction });
 
 };
 
