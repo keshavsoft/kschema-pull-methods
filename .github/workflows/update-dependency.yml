@@ -25,9 +25,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Update node-fs-recursive dependency
+      - name: Update dependency
         run: |
-          npm install node-fs-recursive@latest
+          PACKAGE_NAME="${{ github.event.client_payload.package }}"
+          if [ -n "$PACKAGE_NAME" ]; then
+            echo "Updating package: $PACKAGE_NAME"
+            npm install ${PACKAGE_NAME}@latest
+          else
+            echo "No package specified, updating default dependency node-fs-recursive..."
+            npm install node-fs-recursive@latest
+          fi
 
       - name: Commit and push changes
         run: |
@@ -43,7 +50,7 @@ jobs:
           
           # Commit the changes
           git add package.json package-lock.json
-          git commit -m "chore(deps): update node-fs-recursive to latest [skip ci]"
+          git commit -m "chore(deps): update ${{ github.event.client_payload.package || 'node-fs-recursive' }} to latest [skip ci]"
           
           # Push directly to main
           git push origin HEAD:main
