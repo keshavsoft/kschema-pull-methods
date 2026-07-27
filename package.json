@@ -1,0 +1,35 @@
+{
+  "name": "kschema-pull-methods",
+  "version": "1.2.1",
+  "description": "find the json files in ui, and insert column config",
+  "keywords": [
+    "cli",
+    "scaffold",
+    "templates",
+    "node",
+    "project-generator"
+  ],
+  "dependencies": {
+    "kschema-fs-read-config": "^1.4.8",
+    "node-fs-recursive": "^1.4.4",
+    "pattern-collector-anyjs": "^1.9.1"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "bin/",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://cli.keshavsoft.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshavsoft/kschema-pull-methods"
+  },
+  "bugs": {
+    "url": "https://github.com/keshavsoft/kschema-pull-methods/issues"
+  }
+}

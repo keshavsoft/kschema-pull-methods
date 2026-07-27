@@ -1,0 +1,15 @@
+import path from "path";
+import load from "../../index.js";
+import fs from "fs";
+
+const configPath = path.join(process.cwd(), "Config", "Schemas", "doctors.json");
+
+const doctorsJson = fs.readFileSync(configPath);
+
+const fromNpm = load({
+    toPath: path.join(process.cwd(), "api"),
+    sacredWisdom: JSON.parse(doctorsJson),
+    inTargetPath: process.cwd()
+});
+
+console.log("aaaaaaaaaa : ", fromNpm);
