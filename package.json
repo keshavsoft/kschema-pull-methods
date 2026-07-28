@@ -1,6 +1,6 @@
 {
   "name": "kschema-pull-methods",
-  "version": "1.7.2",
+  "version": "1.8.1",
   "description": "find the json files in ui, and insert column config",
   "keywords": [
     "cli",
