@@ -11,6 +11,7 @@ export default {
             parseRegex1: /router\.(get|post|put|delete|patch)\s*\(\s*['"]([^'"]+)['"].*?\b(\w+)\s*\(/, 
             parseRegex: /router\.\w+\(\s*['"]\/?([^'"]+)['"][\s\S]*?\b(funcFrom\w+)\s*\(/,
             parseRegex2: /router\.\w+\(\s*['"]([^'"]+)['"][\s\S]*?\b(funcFrom\w+)\s*\(/,
+            parseRegex3: /router\.(get|post|put|delete|patch)\(\s*['"]\/?([^'"]+)['"][\s\S]*?\b(funcFrom\w+)\s*\(/,
             searchRegex: /^[ \t]*router\.(?:get|post|put|delete|patch)\b.*;?/gm
         },
         exportRegex: {

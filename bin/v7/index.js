@@ -1,4 +1,5 @@
-import buildStory from './buildStory.js';
+import buildStory from './story/buildStory.js';
+import extractRegex from './extractRegex.js';
 
 const startFunc = ({ filePath, fileContent, inAction = "Crud",
     inTargetPath, showLog = false }) => {
@@ -7,7 +8,17 @@ const startFunc = ({ filePath, fileContent, inAction = "Crud",
 
     switch (inAction) {
         case "Crud":
-            const story = buildStory({ filePath, fileContent, inTargetPath });
+            const parseRegex3 = extractRegex.fromEndPointsJs.consumptionRegex.parseRegex3;
+            const fileNameToCompare = "end-points.js";
+
+            const story = buildStory({
+                filePath,
+                fileContent,
+                inTargetPath,
+                parseRegex: parseRegex3,
+                fileNameToCompare,
+                extractRegex: extractRegex.fromEndPointsJs
+            });
 
             return story;
 
