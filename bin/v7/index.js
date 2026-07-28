@@ -2,6 +2,7 @@ import buildStory from './buildStory.js';
 
 const startFunc = ({ filePath, fileContent, inAction = "Crud",
     inTargetPath, showLog = false }) => {
+
     if (showLog) console.log("filePath : ", filePath, inTargetPath, showLog);
 
     switch (inAction) {
