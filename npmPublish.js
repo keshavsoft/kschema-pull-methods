@@ -52,7 +52,14 @@ if (isLocalVersionGreater(localVersion, publishedVersion)) {
         if (process.env.GITHUB_STEP_SUMMARY) {
             fs.appendFileSync(
                 process.env.GITHUB_STEP_SUMMARY,
-                `### ✅ Successfully Published\n- **Package:** \`${packageName}\`\n- **Version:** \`${localVersion}\`\n`
+                `### ✅ Successfully Published\n` +
+                `- **Package:** \`${packageName}\`\n` +
+                `- **Old Version:** \`${publishedVersion}\`\n` +
+                `- **New Version:** \`${localVersion}\`\n` +
+                `- **NPM Link:** [${packageName} on npm](https://www.npmjs.com/package/${packageName})\n\n` +
+                `### 📢 Notified Repositories\n` +
+                `- [keshavsoft/kschema-fs-api-gen-post-actions](https://github.com/keshavsoft/kschema-fs-api-gen-post-actions)\n` +
+                `- [keshavsoft/kschema-build-endpoints](https://github.com/keshavsoft/kschema-build-endpoints)\n`
             );
         }
     } catch (publishError) {
