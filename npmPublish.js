@@ -77,7 +77,10 @@ if (isLocalVersionGreater(localVersion, publishedVersion)) {
     if (process.env.GITHUB_STEP_SUMMARY) {
         fs.appendFileSync(
             process.env.GITHUB_STEP_SUMMARY,
-            `### ⚠️ Publish Skipped\n- **Package:** \`${packageName}\`\n- **Version:** \`${localVersion}\` (npm version: \`${publishedVersion}\`)\n`
+            `### ⚠️ Publish Skipped\n` +
+            `- **Package:** \`${packageName}\`\n` +
+            `- **Version:** \`${localVersion}\` (npm version: \`${publishedVersion}\`)\n` +
+            `- **NPM Link:** [${packageName} on npm](https://www.npmjs.com/package/${packageName})\n`
         );
     }
 }
