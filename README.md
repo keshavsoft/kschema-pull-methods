@@ -1,25 +1,25 @@
-# kschema-fs-ui-alter-config
+# kschema-pull-methods
 
-> Find JSON files in your UI directory structure and inject/alter their column configurations automatically.
+> Find backend router methods, endpoint paths, and handler controller functions dynamically from backend source files.
 
-`kschema-fs-ui-alter-config` is a lightweight, configuration-driven utility designed to synchronize table column configurations (`columnsConfig`) from a master schema JSON to target UI configuration files (specifically matching `**/configs/showAll.json`).
+`kschema-pull-methods` is a lightweight, configuration-driven utility designed to extract express-style routing configurations, controller functions, and REST client paths from backend router files (specifically matching `**/end-points.js`).
 
 ---
 
 ## Features
 
-- 🔍 **Automated Discovery**: Recursively searches the workspace to locate `showAll.json` files within `configs/` folders.
-- ⚙️ **Config Ingestion**: Extracts column definitions from a master JSON configuration file.
-- ⚡ **Seamless Mutation**: Updates target JSON configuration files in-place with the retrieved column configuration.
-- 📦 **Version-Isolated Runtimes**: Employs a dynamic runner system that loads the latest runtime version (currently `v3`).
-- 📖 **Story-Driven Architecture**: The latest execution engine (`v3`) is structured as a clear narrative using concepts of a Scout, an Oracle, and a Blacksmith for self-documenting code.
+- 🔍 **Automated Route Discovery**: Scans target files and matches endpoint configurations using customized regular expressions.
+- ⚙️ **Modular Pure Functions**: Core processing logic is fully decoupled from static configurations, making the execution pipeline clean and testable.
+- ⚡ **Seamless Mapping**: Extracts the exact HTTP method, endpoint name, controller handler name, and REST client target path.
+- 📦 **Version-Isolated Runtimes**: Uses a dynamic runner system that dynamically resolves and loads the latest runtime version (currently `v8`).
+- 📖 **Story-Driven Architecture**: The execution engine is structured as a clear narrative using modular components of a Scout, a Decipherer, and a Conductor for self-documenting code.
 
 ---
 
 ## Installation
 
 ```bash
-npm install kschema-fs-ui-alter-config
+npm install kschema-pull-methods
 ```
 
 ---
@@ -31,31 +31,40 @@ npm install kschema-fs-ui-alter-config
 Import the default function and invoke it with target options:
 
 ```javascript
-import load from "kschema-fs-ui-alter-config";
-import path from "node:path";
+import load from "kschema-pull-methods";
+import extractRegex from "./extractRegex.js";
 
-load({
-    // The directory tree containing UI json configurations to alter
-    toPath: path.join(process.cwd(), "ui", "doctors"),
+const story = load({
+    // Path to the backend routes file (e.g. end-points.js)
+    filePath: "/workspace/api/v1/doctors/end-points.js",
     
-    // Path to the master JSON configuration schema containing the columnsConfig
-    configPath: path.join(process.cwd(), "Config", "Schemas", "doctors.json"),
+    // Content of the routes file
+    fileContent: "router.get('/showAll', (req, res) => funcFromshowAll({ req, res }));",
     
-    // The action to perform (currently supports "Crud")
+    // Base target path to calculate REST client path prefix
+    inTargetPath: "/workspace",
+    
+    // Extracted regex rules matching router and imports configurations
+    extractRegex: extractRegex.fromEndPointsJs,
+    
+    // The action to perform (defaults to "Crud")
     inAction: "Crud"
 });
+
+console.log(story);
 ```
 
 ---
 
-## Architecture & Code Story (v3)
+## Architecture & Code Story (v8)
 
-In version 3, the codebase behaves like an adventure quest rather than standard dry modules:
+In version 8, the codebase behaves like an adventure quest rather than standard dry modules:
 
-1. **The Scout** (`scout.js`): Recursively searches the specified realm (`toPath`) to locate target gems (`showAll.json` under `configs/` subdirectories).
-2. **The Oracle** (`oracle.js`): Consults the ancient scrolls (`configPath`) to fetch the master `columnsConfig`.
-3. **The Blacksmith** (`blacksmith.js`): Transmutes/forges the target files in-place by infusing them with the columns configuration.
-4. **The Chronicle** (`index.js`): Directs the journey, orchestrating the steps from scouting to transmuting.
+1. **The Scout** (`story/scout.js`): Scans the scroll (file content) purely using regex configurations to locate target endpoint lines.
+2. **The Decipherer** (`story/decipherer.js`): Interprets each line using patterns to extract the HTTP method, endpoint path, and controller function name.
+3. **The Path Finder** (`files/pullEndPoint.js`): Calculates the clean REST client endpoint path from the file path.
+4. **The Conductor** (`story/conductor.js`): Directs the journey, orchestrating the Scout, Decipherer, and Path Finder to assemble the final endpoint story.
+5. **The Chronicle** (`index.js`): Acts as the main gatekeeper, retrieving target options from the outside and passing them purely down to the Story components.
 
 ---
 
@@ -63,15 +72,14 @@ In version 3, the codebase behaves like an adventure quest rather than standard 
 
 Clone the repository:
 ```bash
-git clone https://github.com/keshavsoft/kschema-fs-ui-alter-config.git
-cd kschema-fs-ui-alter-config
+git clone https://github.com/keshavsoft/kschema-pull-methods.git
+cd kschema-pull-methods
 npm install
 ```
 
 To run the local validation tests:
 ```bash
-cd test/v3
-node test.js
+node test/v10/test.js
 ```
 
 ---
