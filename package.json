@@ -1,6 +1,6 @@
 {
   "name": "kschema-pull-methods",
-  "version": "1.12.4",
+  "version": "1.13.2",
   "description": "find the json files in ui, and insert column config",
   "keywords": [
     "cli",
@@ -10,10 +10,7 @@
     "project-generator"
   ],
   "dependencies": {
-    "kschema-fs-read-config": "^1.4.8",
-    "node-fs-recursive": "^1.4.4",
-    "pattern-collector-anyjs": "^1.9.1",
-    "pattern-collector-base-regex-n-parts": "^1.6.4"
+    "pattern-collector-anyjs-story": "^1.23.2"
   },
   "type": "module",
   "exports": {
