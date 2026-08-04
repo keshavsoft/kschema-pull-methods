@@ -1,5 +1,3 @@
-import path from "path";
-
 import { pullEndPointForRestClient } from "../files/pullEndPoint.js";
 
 /**
@@ -12,7 +10,7 @@ const decipherLine = ({ part1, part2, part3, inFilePath, inTargetPath, fileNameT
     returnObject.endPoint = part2;
     returnObject.funcToRun = part3;
     returnObject.forRestClient = pullEndPointForRestClient({ inFilePath, inTargetPath, fileNameToCompare });
-    returnObject.forRestClientFull = `${returnObject.forRestClient}${returnObject.endPoint}`;
+    returnObject.forRestClientFull = `${returnObject.forRestClient}${returnObject.endPoint}`.replace(/\/{2,}/g, "/");
 
     return returnObject;
 };
