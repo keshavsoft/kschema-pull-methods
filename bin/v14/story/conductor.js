@@ -1,3 +1,4 @@
+import path from "path";
 import patterCollectorAnyJs from "pattern-collector-anyjs-story";
 
 // import scoutRunes from './scout.js';
@@ -6,11 +7,14 @@ import decipherLine from './decipherer.js';
 /**
  * The Conductor orchestrates the Scout and the Decipherer to construct the final Endpoint stories.
  */
-const constructStories = ({ filePath, fileContent, inTargetPath, parseRegex, fileNameToCompare, fileType }) => {
+const constructStories = ({ filePath, fileContent, inTargetPath, fileType }) => {
     const rawLines = patterCollectorAnyJs({ fileContent, fileType });
     const storyOfEndPoint = [];
+    const fileNameToCompare = path.basename(filePath);
 
     rawLines?.linesStory?.useLines?.forEach(element => {
+        // console.log("aaaaaaaaaaaaaa : ", element, filePath);
+
         const details = decipherLine({
             part1: element?.part1,
             part2: element?.part2,
@@ -18,7 +22,6 @@ const constructStories = ({ filePath, fileContent, inTargetPath, parseRegex, fil
             inFilePath: filePath,
             inTargetPath,
             line: element.line,
-            parseRegex,
             fileNameToCompare
         });
 
